@@ -11,7 +11,7 @@ b = 0.1; %[-]
 I = (1/3)*m*(2*Length)^2; %[kg-m^2] 
 g = 9.81; %[m/s2]
 r = .0191; %[m] 38.2016mm pitch diameter 
-D = -0.5; %Disturbance
+D = 0; %Disturbance
 
 J = 2.12e-5; %[kg-m^2]
 Kt = 0.065; %[N-m/A]
@@ -20,11 +20,17 @@ L = 2.26e-3; %[H] Inductance
 Kv = 0.065; %[V/(rad/s)]
 B = 1.21e-5; %[N-m /(rad/s)]
 
-%% Run Simulink file InvertedPendulumControl.mdl
+%% Run Simulink file InvertedPendulumControl.slx
 
-Kp = 788; %788
-Ki = 1; %150
-Kd = 1; %170
+% Pendulum Gains
+Kp = 1;
+Ki = 1; 
+Kd = 1; 
+
+% Cart Position Gains
+Kpx = 1;
+Kix = 1;
+Kdx = 1; 
 
 th0 = 0; %Assume initial condition of standing up
 thd0 = 0.1222; %[rad/s]
@@ -54,19 +60,19 @@ time = 0:.01:10;
 x_int = interp1(t,x,time);
 th_int = interp1(t,th,time);
 
-%Any time cart hits limit switches, reset with th = pi, x = 0
-TimeUpright = 0;
-for j = 1:length(time)
-    if x_int(j) >= 241.2
-        x_int(j) = 0;
-        th_int(j) = pi;
-    elseif x_int(j) <= -241.2
-        x_int(j) = 0;
-        th_int(j) = pi;
-    end
-    
-    %determine time upright
-end
+% % Any time cart hits limit switches, reset with th = pi, x = 0
+% TimeUpright = 0;
+% for j = 1:length(time)
+%     if x_int(j) >= 241.2
+%         x_int(j) = 0;
+%         th_int(j) = pi;
+%     elseif x_int(j) <= -241.2
+%         x_int(j) = 0;
+%         th_int(j) = pi;
+%     end
+%     
+%    % determine time upright
+% end
 
 %% Animation
 
