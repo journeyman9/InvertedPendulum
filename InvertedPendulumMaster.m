@@ -23,14 +23,14 @@ B = 1.21e-5; %[N-m /(rad/s)]
 %% Run Simulink file InvertedPendulumControl.slx
 
 % Pendulum Gains
-Kp = 1;
-Ki = 1; 
-Kd = 1; 
+Kp = 0;
+Ki = 0; 
+Kd = 0; 
 
 % Cart Position Gains
-Kpx = 1;
-Kix = 1;
-Kdx = 1; 
+Kpx = 0;
+Kix = 0;
+Kdx = 0; 
 
 th0 = 0; %Assume initial condition of standing up
 thd0 = 0.1222; %[rad/s]
@@ -75,31 +75,31 @@ th_int = interp1(t,th,time);
 % end
 
 %% Animation
-
-W = 75;  % cart width
-H = 50; % cart height
-y = H/2;
-
-figure
-for i = 1:length(time)
-        plot([-625 625],[0 0],'k','Linewidth',1) %ground plane
-        hold on
-
-        P0 = [x_int(i) y];
-        P1 = 2*Length*1000*[sin(th_int(i)) cos(th_int(i))];
-
-        %cart
-        rectangle('Position',[P0(1)-W/2,P0(2)-H/2,W,H],'Curvature',.5,'FaceColor',[1 0.1 0.1])
-
-        %pendulum
-        plot([P0(1) P0(1)-P1(1)],[P0(2) P1(2)],'LineWidth',3,'Color',[0 0 0]);
-
-        xlabel('Track [mm]')
-        ylabel('Vertical [mm]')
-        xlim([-550 550])
-        ylim([-550 550])
-        drawnow
-        hold off
-end
+% 
+% W = 75;  % cart width
+% H = 50; % cart height
+% y = H/2;
+% 
+% figure
+% for i = 1:length(time)
+%         plot([-625 625],[0 0],'k','Linewidth',1) %ground plane
+%         hold on
+% 
+%         P0 = [x_int(i) y];
+%         P1 = 2*Length*1000*[sin(th_int(i)) cos(th_int(i))];
+% 
+%         %cart
+%         rectangle('Position',[P0(1)-W/2,P0(2)-H/2,W,H],'Curvature',.5,'FaceColor',[1 0.1 0.1])
+% 
+%         %pendulum
+%         plot([P0(1) P0(1)-P1(1)],[P0(2) P1(2)],'LineWidth',3,'Color',[0 0 0]);
+% 
+%         xlabel('Track [mm]')
+%         ylabel('Vertical [mm]')
+%         xlim([-550 550])
+%         ylim([-550 550])
+%         drawnow
+%         hold off
+% end
 
 
