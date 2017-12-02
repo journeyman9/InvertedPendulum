@@ -11,7 +11,7 @@ b = 0.1; %[-]
 I = (1/3)*m*(2*Length)^2; %[kg-m^2] 
 g = 9.81; %[m/s2]
 r = .0191; %[m] 38.2016mm pitch diameter 
-D = 0; %Disturbance
+D = 0.001; %Disturbance
 
 J = 2.12e-5; %[kg-m^2]
 Kt = 0.065; %[N-m/A]
@@ -23,17 +23,18 @@ B = 1.21e-5; %[N-m /(rad/s)]
 %% Run Simulink file InvertedPendulumControl.slx
 
 % Pendulum Gains
-Kp = 0;
+Kp = 1;
 Ki = 0; 
 Kd = 0; 
 
 % Cart Position Gains
-Kpx = 0;
-Kix = 0;
+Kpx = .00001;
+Kix = .0001;
 Kdx = 0; 
 
 th0 = 0; %Assume initial condition of standing up
-thd0 = 0.1222; %[rad/s]
+% thd0 = 0.1222; %[rad/s]
+thd0 = 0;
 sim('InvertedPendulumControl.slx')
 
 th = simout(:,1); %theta [deg]
@@ -56,7 +57,7 @@ xlabel('time [s]')
 
 %% Interpolation for smooth animation
 
-time = 0:.01:10; 
+time = 0:.01:50; 
 x_int = interp1(t,x,time);
 th_int = interp1(t,th,time);
 
