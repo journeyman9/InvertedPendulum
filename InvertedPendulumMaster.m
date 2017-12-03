@@ -23,18 +23,23 @@ B = 1.21e-5; %[N-m /(rad/s)]
 %% Run Simulink file InvertedPendulumControl.slx
 
 % Pendulum Gains
-Kp = 1;
+Kp = 0;
 Ki = 0; 
 Kd = 0; 
 
 % Cart Position Gains
-Kpx = .00001;
-Kix = .0001;
+Kpx = 0;
+Kix = 0;
 Kdx = 0; 
 
+% Cart Velocity Gains
+Kpv = 0;
+Kiv = 0;
+Kdv = 0;
+
 th0 = 0; %Assume initial condition of standing up
-% thd0 = 0.1222; %[rad/s]
-thd0 = 0;
+thd0 = 0; %[rad/s] 0.1222
+
 sim('InvertedPendulumControl.slx')
 
 th = simout(:,1); %theta [deg]
