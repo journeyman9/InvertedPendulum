@@ -11,7 +11,7 @@ b = 0.1; %[-]
 I = (1/3)*m*(2*Length)^2; %[kg-m^2] 
 g = 9.81; %[m/s2]
 r = .0191; %[m] 38.2016mm pitch diameter 
-D = 0.001; %Disturbance
+D = 0; %Disturbance
 
 J = 2.12e-5; %[kg-m^2]
 Kt = 0.065; %[N-m/A]
@@ -37,7 +37,7 @@ Kpv = 0;
 Kiv = 0;
 Kdv = 0;
 
-th0 = 0; %Assume initial condition of standing up
+th0 = 0.05; %Assume initial condition of standing up
 thd0 = 0; %[rad/s] 0.1222
 
 sim('InvertedPendulumControl.slx')
@@ -48,17 +48,26 @@ Torque = simout(:,3); % Force from Motor
 
 %% Plot
 
+% figure
+% subplot(3,1,1)
+% plot(t,th)
+% ylabel('[rad]')
+% subplot(3,1,2)
+% plot(t,x)
+% ylabel('[mm]')
+% subplot(3,1,3)
+% plot(t,Torque)
+% ylabel('[N-m]')
+% xlabel('time [s]')
+
 figure
-subplot(3,1,1)
+subplot(2,1,1)
 plot(t,th)
 ylabel('[rad]')
-subplot(3,1,2)
+subplot(2,1,2)
 plot(t,x)
 ylabel('[mm]')
-subplot(3,1,3)
-plot(t,Torque)
-ylabel('[N-m]')
-xlabel('time [s]')
+
 
 %% Interpolation for smooth animation
 
@@ -81,7 +90,7 @@ th_int = interp1(t,th,time);
 % end
 
 %% Animation
-% 
+
 % W = 75;  % cart width
 % H = 50; % cart height
 % y = H/2;
@@ -102,10 +111,10 @@ th_int = interp1(t,th,time);
 % 
 %         xlabel('Track [mm]')
 %         ylabel('Vertical [mm]')
-%         xlim([-550 550])
-%         ylim([-550 550])
+%         xlim([-350 350])
+%         ylim([-350 350])
 %         drawnow
 %         hold off
 % end
-
-
+% 
+% 
